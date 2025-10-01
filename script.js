@@ -67,13 +67,15 @@ const changeBackground = (index) => {
 // Display affirmation with animation
 const displayAffirmation = (text) => {
     const affirmationEl = document.getElementById('affirmation');
+    const affirmationBackEl = document.getElementById('affirmation-back');
 
-    // Update text immediately
+    // Update text immediately on both cards
     affirmationEl.textContent = text;
+    affirmationBackEl.textContent = text;
 };
 
 // Animate card shuffle - simple visual animation
-const animateCardShuffle = (callback) => {
+const animateCardShuffle = () => {
     const cardFront = document.querySelector('.card-front');
     const cardBack1 = document.querySelector('.card-back-1');
     const cardBack2 = document.querySelector('.card-back-2');
@@ -86,19 +88,15 @@ const animateCardShuffle = (callback) => {
     cardBack1.classList.add('shuffling');
     cardBack2.classList.add('shuffling');
 
-    // After animation, just update the content without changing structure
+    // After animation, remove shuffling classes
     setTimeout(() => {
-        // Remove shuffling classes
         cardFront.classList.remove('shuffling');
         cardBack1.classList.remove('shuffling');
         cardBack2.classList.remove('shuffling');
 
         // Re-enable pointer events
         cardFront.style.pointerEvents = 'auto';
-
-        // Execute callback to update affirmation and background
-        if (callback) callback();
-    }, 600);
+    }, 700);
 };
 
 // Shuffle function
