@@ -2,21 +2,21 @@
 
 // Affirmations
 const affirmations = [
-    'Eres increíble tal como eres',
-    'Mereces amor y respeto',
-    'Tus sueños son válidos',
-    'Eres suficiente',
-    'Tienes el poder de crear cambios positivos',
-    'Eres valioso y único',
-    'Cada día es una nueva oportunidad',
-    'Confía en tu proceso',
-    'Eres digno de cosas buenas',
-    'Tu voz importa',
-    'Estás exactamente donde necesitas estar',
-    'Tu luz brilla intensamente',
-    'Mereces todas las cosas buenas',
-    'Eres amado profundamente',
-    'Tu presencia es un regalo'
+    'You are amazing just as you are',
+    'You deserve love and respect',
+    'Your dreams are valid',
+    'You are enough',
+    'You have the power to create positive change',
+    'You are valuable and unique',
+    'Each day is a new opportunity',
+    'Trust your process',
+    'You are worthy of good things',
+    'Your voice matters',
+    'You are exactly where you need to be',
+    'Your light shines brightly',
+    'You deserve all the good things',
+    'You are deeply loved',
+    'Your presence is a gift'
 ];
 
 // Track current indices to avoid repetition
