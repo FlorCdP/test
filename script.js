@@ -56,12 +56,27 @@ const getRandomBackground = () => {
 // Change background
 const changeBackground = (index) => {
     const backgroundEl = document.getElementById('background');
+
+    // Create a temporary container for the new background
+    const tempBg = document.createElement('div');
+    tempBg.className = 'background';
+    tempBg.style.opacity = '0';
+    tempBg.innerHTML = backgrounds[index];
+    document.body.appendChild(tempBg);
+
+    // Fade in new background
+    setTimeout(() => {
+        tempBg.style.opacity = '1';
+    }, 50);
+
+    // Fade out old background
     backgroundEl.style.opacity = '0';
 
+    // Remove old background after transition
     setTimeout(() => {
-        backgroundEl.innerHTML = backgrounds[index];
-        backgroundEl.style.opacity = '1';
-    }, 400);
+        backgroundEl.remove();
+        tempBg.id = 'background';
+    }, 800);
 };
 
 // Display affirmation with animation
