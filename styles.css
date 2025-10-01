@@ -182,15 +182,18 @@ body {
 }
 
 .card-front.shuffling {
-    animation: cardMoveToBack 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: cardMoveToBack 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+    z-index: 4;
 }
 
 .card-back-1.shuffling {
-    animation: cardMoveFromBack1ToFront 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: cardMoveFromBack1ToFront 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+    z-index: 5;
 }
 
 .card-back-2.shuffling {
-    animation: cardMoveFromBack2ToBack1 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation: cardMoveFromBack2ToBack1 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
+    z-index: 2;
 }
 
 /* Controls */

@@ -90,24 +90,38 @@ const animateCardShuffle = (callback) => {
     const cardBack1 = document.querySelector('.card-back-1');
     const cardBack2 = document.querySelector('.card-back-2');
 
-    // Add shuffling class to trigger animations
+    // Disable float animation on front card during shuffle
+    cardFront.style.animation = 'none';
+
+    // Add shuffling class to trigger animations while keeping position classes
     cardFront.classList.add('shuffling');
     cardBack1.classList.add('shuffling');
     cardBack2.classList.add('shuffling');
 
-    // After animation completes, swap the classes and remove shuffling
+    // After animation completes, swap the classes
     setTimeout(() => {
+        // Remove shuffling classes
+        cardFront.classList.remove('shuffling');
+        cardBack1.classList.remove('shuffling');
+        cardBack2.classList.remove('shuffling');
+
         // Rotate the stack: front -> back2, back1 -> front, back2 -> back1
-        cardFront.className = 'card card-back-2';
-        cardBack1.className = 'card card-front';
-        cardBack2.className = 'card card-back-1';
+        const oldFront = cardFront;
+        const oldBack1 = cardBack1;
+        const oldBack2 = cardBack2;
+
+        oldFront.className = 'card card-back-2';
+        oldBack1.className = 'card card-front';
+        oldBack2.className = 'card card-back-1';
+
+        // Re-enable float animation on new front card
+        const newFront = document.querySelector('.card-front');
+        newFront.style.animation = 'float 6s ease-in-out infinite';
 
         // Move the affirmation to the new front card
-        const affirmation = cardFront.querySelector('.affirmation');
-        const newFront = document.querySelector('.card-front');
-
+        const affirmation = oldFront.querySelector('.affirmation');
         if (affirmation && newFront && !newFront.querySelector('.affirmation')) {
-            cardFront.removeChild(affirmation);
+            oldFront.removeChild(affirmation);
             newFront.appendChild(affirmation);
         }
 
