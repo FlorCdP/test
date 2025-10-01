@@ -3,42 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Web</title>
+    <title>Affirmation Mirror</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Bienvenido a Mi Web</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#about">Acerca de</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div class="container">
+        <header>
+            <h1>✨ Affirmation Mirror ✨</h1>
+            <p class="subtitle">Mira tu reflejo y recibe afirmaciones positivas</p>
+        </header>
 
-    <main>
-        <section id="home">
-            <h2>Inicio</h2>
-            <p>Esta es una página web construida con HTML, CSS y JavaScript puro.</p>
-            <button id="changeColorBtn">Cambiar Color</button>
-        </section>
+        <main>
+            <div class="mirror-container">
+                <div class="mirror">
+                    <div id="affirmation" class="affirmation">
+                        Eres increíble tal como eres
+                    </div>
+                </div>
+            </div>
 
-        <section id="about">
-            <h2>Acerca de</h2>
-            <p>Sección de información sobre el proyecto.</p>
-        </section>
+            <div class="controls">
+                <button id="newAffirmationBtn" class="btn-primary">Nueva Afirmación</button>
+                <button id="addAffirmationBtn" class="btn-secondary">Agregar Afirmación</button>
+            </div>
 
-        <section id="contact">
-            <h2>Contacto</h2>
-            <p>Ponte en contacto con nosotros.</p>
-        </section>
-    </main>
+            <div id="addForm" class="add-form hidden">
+                <input type="text" id="customAffirmation" placeholder="Escribe tu afirmación personalizada">
+                <button id="saveAffirmationBtn" class="btn-save">Guardar</button>
+                <button id="cancelBtn" class="btn-cancel">Cancelar</button>
+            </div>
+        </main>
 
-    <footer>
-        <p>&copy; 2025 Mi Web. Todos los derechos reservados.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2025 Affirmation Mirror</p>
+        </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
