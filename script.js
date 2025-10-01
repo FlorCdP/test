@@ -67,21 +67,9 @@ const changeBackground = (index) => {
 // Display affirmation with animation
 const displayAffirmation = (text) => {
     const affirmationEl = document.getElementById('affirmation');
-    const cardEl = document.getElementById('card');
 
-    // Fade out
-    affirmationEl.style.opacity = '0';
-    affirmationEl.style.transform = 'scale(0.85) translateY(20px)';
-
-    setTimeout(() => {
-        affirmationEl.textContent = text;
-
-        // Fade in
-        setTimeout(() => {
-            affirmationEl.style.opacity = '1';
-            affirmationEl.style.transform = 'scale(1) translateY(0)';
-        }, 50);
-    }, 300);
+    // Update text immediately
+    affirmationEl.textContent = text;
 };
 
 // Animate card shuffle - simple visual animation
@@ -118,11 +106,11 @@ const shuffle = () => {
     const newAffirmation = getRandomAffirmation();
     const newBackgroundIndex = getRandomBackground();
 
-    // Animate cards, then update content and background
-    animateCardShuffle(() => {
-        displayAffirmation(newAffirmation);
-        changeBackground(newBackgroundIndex);
-    });
+    // Update content immediately, then animate cards
+    displayAffirmation(newAffirmation);
+    changeBackground(newBackgroundIndex);
+
+    animateCardShuffle();
 };
 
 // Event listener for shuffle button
