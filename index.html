@@ -4,41 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Affirmation Mirror</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>✨ Affirmation Mirror ✨</h1>
-            <p class="subtitle">Mira tu reflejo y recibe afirmaciones positivas</p>
-        </header>
+    <div id="background" class="background"></div>
 
-        <main>
-            <div class="mirror-container">
-                <div class="mirror">
-                    <div id="affirmation" class="affirmation">
-                        Eres increíble tal como eres
-                    </div>
-                </div>
-            </div>
-
-            <div class="controls">
-                <button id="newAffirmationBtn" class="btn-primary">Nueva Afirmación</button>
-                <button id="addAffirmationBtn" class="btn-secondary">Agregar Afirmación</button>
-            </div>
-
-            <div id="addForm" class="add-form hidden">
-                <input type="text" id="customAffirmation" placeholder="Escribe tu afirmación personalizada">
-                <button id="saveAffirmationBtn" class="btn-save">Guardar</button>
-                <button id="cancelBtn" class="btn-cancel">Cancelar</button>
-            </div>
-        </main>
-
-        <footer>
-            <p>&copy; 2025 Affirmation Mirror</p>
-        </footer>
+    <div class="card-container">
+        <div id="card" class="card">
+            <p id="affirmation" class="affirmation">Eres increíble tal como eres</p>
+        </div>
     </div>
 
+    <div class="controls">
+        <button id="shuffleBtn" class="shuffle-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>
+            </svg>
+            Shuffle
+        </button>
+    </div>
+
+    <script src="backgrounds.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

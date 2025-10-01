@@ -1,7 +1,7 @@
-// Affirmation Mirror - JavaScript
+// Affirmation Mirror - Refined Version
 
-// Default affirmations
-let affirmations = [
+// Affirmations
+const affirmations = [
     'Eres increíble tal como eres',
     'Mereces amor y respeto',
     'Tus sueños son válidos',
@@ -11,81 +11,98 @@ let affirmations = [
     'Cada día es una nueva oportunidad',
     'Confía en tu proceso',
     'Eres digno de cosas buenas',
-    'Tu voz importa'
+    'Tu voz importa',
+    'Estás exactamente donde necesitas estar',
+    'Tu luz brilla intensamente',
+    'Mereces todas las cosas buenas',
+    'Eres amado profundamente',
+    'Tu presencia es un regalo'
 ];
 
-// Load custom affirmations from localStorage
-const loadAffirmations = () => {
-    const saved = localStorage.getItem('customAffirmations');
-    if (saved) {
-        const custom = JSON.parse(saved);
-        affirmations = [...affirmations, ...custom];
-    }
-};
+// Track current indices to avoid repetition
+let currentAffirmationIndex = 0;
+let currentBackgroundIndex = 0;
+let usedAffirmations = [];
+let usedBackgrounds = [];
 
-// Save custom affirmations to localStorage
-const saveCustomAffirmation = (affirmation) => {
-    const saved = localStorage.getItem('customAffirmations');
-    const custom = saved ? JSON.parse(saved) : [];
-    custom.push(affirmation);
-    localStorage.setItem('customAffirmations', JSON.stringify(custom));
-};
-
-// Get random affirmation
+// Get random unique affirmation
 const getRandomAffirmation = () => {
-    const randomIndex = Math.floor(Math.random() * affirmations.length);
-    return affirmations[randomIndex];
+    if (usedAffirmations.length === affirmations.length) {
+        usedAffirmations = [];
+    }
+
+    let availableAffirmations = affirmations.filter((_, index) => !usedAffirmations.includes(index));
+    let randomIndex = Math.floor(Math.random() * availableAffirmations.length);
+    let affirmationText = availableAffirmations[randomIndex];
+    let actualIndex = affirmations.indexOf(affirmationText);
+
+    usedAffirmations.push(actualIndex);
+    return affirmationText;
 };
 
-// Display affirmation
+// Get random unique background
+const getRandomBackground = () => {
+    if (usedBackgrounds.length === backgrounds.length) {
+        usedBackgrounds = [];
+    }
+
+    let availableBackgrounds = backgrounds.map((_, index) => index).filter(index => !usedBackgrounds.includes(index));
+    let randomIndex = availableBackgrounds[Math.floor(Math.random() * availableBackgrounds.length)];
+
+    usedBackgrounds.push(randomIndex);
+    return randomIndex;
+};
+
+// Change background
+const changeBackground = (index) => {
+    const backgroundEl = document.getElementById('background');
+    backgroundEl.style.opacity = '0';
+
+    setTimeout(() => {
+        backgroundEl.innerHTML = backgrounds[index];
+        backgroundEl.style.opacity = '1';
+    }, 400);
+};
+
+// Display affirmation with animation
 const displayAffirmation = (text) => {
     const affirmationEl = document.getElementById('affirmation');
-    affirmationEl.style.animation = 'none';
+    const cardEl = document.getElementById('card');
+
+    // Fade out
+    affirmationEl.style.opacity = '0';
+    affirmationEl.style.transform = 'scale(0.85) translateY(20px)';
+
     setTimeout(() => {
         affirmationEl.textContent = text;
-        affirmationEl.style.animation = 'fadeIn 0.5s ease-in';
-    }, 50);
+
+        // Fade in
+        setTimeout(() => {
+            affirmationEl.style.opacity = '1';
+            affirmationEl.style.transform = 'scale(1) translateY(0)';
+        }, 50);
+    }, 350);
 };
 
-// Event listeners
-document.getElementById('newAffirmationBtn').addEventListener('click', () => {
+// Shuffle function
+const shuffle = () => {
     const newAffirmation = getRandomAffirmation();
+    const newBackgroundIndex = getRandomBackground();
+
     displayAffirmation(newAffirmation);
+    changeBackground(newBackgroundIndex);
+};
+
+// Event listener for shuffle button
+document.getElementById('shuffleBtn').addEventListener('click', shuffle);
+
+// Initialize with first background and affirmation
+document.addEventListener('DOMContentLoaded', () => {
+    const initialBackgroundIndex = getRandomBackground();
+    changeBackground(initialBackgroundIndex);
+
+    // Mark the first affirmation as used
+    usedAffirmations.push(0);
 });
 
-document.getElementById('addAffirmationBtn').addEventListener('click', () => {
-    const form = document.getElementById('addForm');
-    form.classList.toggle('hidden');
-    if (!form.classList.contains('hidden')) {
-        document.getElementById('customAffirmation').focus();
-    }
-});
-
-document.getElementById('saveAffirmationBtn').addEventListener('click', () => {
-    const input = document.getElementById('customAffirmation');
-    const newAffirmation = input.value.trim();
-
-    if (newAffirmation) {
-        affirmations.push(newAffirmation);
-        saveCustomAffirmation(newAffirmation);
-        displayAffirmation(newAffirmation);
-        input.value = '';
-        document.getElementById('addForm').classList.add('hidden');
-    }
-});
-
-document.getElementById('cancelBtn').addEventListener('click', () => {
-    document.getElementById('customAffirmation').value = '';
-    document.getElementById('addForm').classList.add('hidden');
-});
-
-// Allow Enter key to save affirmation
-document.getElementById('customAffirmation').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        document.getElementById('saveAffirmationBtn').click();
-    }
-});
-
-// Initialize
-loadAffirmations();
-console.log('✨ Affirmation Mirror cargado ✨');
+console.log('✨ Affirmation Mirror loaded ✨');
