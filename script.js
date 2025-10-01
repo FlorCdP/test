@@ -81,7 +81,39 @@ const displayAffirmation = (text) => {
             affirmationEl.style.opacity = '1';
             affirmationEl.style.transform = 'scale(1) translateY(0)';
         }, 50);
-    }, 350);
+    }, 300);
+};
+
+// Animate card shuffle
+const animateCardShuffle = (callback) => {
+    const cardFront = document.querySelector('.card-front');
+    const cardBack1 = document.querySelector('.card-back-1');
+    const cardBack2 = document.querySelector('.card-back-2');
+
+    // Add shuffling class to trigger animations
+    cardFront.classList.add('shuffling');
+    cardBack1.classList.add('shuffling');
+    cardBack2.classList.add('shuffling');
+
+    // After animation completes, swap the classes and remove shuffling
+    setTimeout(() => {
+        // Rotate the stack: front -> back2, back1 -> front, back2 -> back1
+        cardFront.className = 'card card-back-2';
+        cardBack1.className = 'card card-front';
+        cardBack2.className = 'card card-back-1';
+
+        // Move the affirmation to the new front card
+        const affirmation = cardFront.querySelector('.affirmation');
+        const newFront = document.querySelector('.card-front');
+
+        if (affirmation && newFront && !newFront.querySelector('.affirmation')) {
+            cardFront.removeChild(affirmation);
+            newFront.appendChild(affirmation);
+        }
+
+        // Execute callback
+        if (callback) callback();
+    }, 600);
 };
 
 // Shuffle function
@@ -89,8 +121,11 @@ const shuffle = () => {
     const newAffirmation = getRandomAffirmation();
     const newBackgroundIndex = getRandomBackground();
 
-    displayAffirmation(newAffirmation);
-    changeBackground(newBackgroundIndex);
+    // Animate cards, then update content and background
+    animateCardShuffle(() => {
+        displayAffirmation(newAffirmation);
+        changeBackground(newBackgroundIndex);
+    });
 };
 
 // Event listener for shuffle button
